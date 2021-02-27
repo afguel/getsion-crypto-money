@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,6 +17,20 @@
 	href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
 	integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
 	crossorigin="anonymous" />
+	
+<script type='text/javascript'>
+				 function stoppedTyping(){
+				 console.log(document.getElementById('nom').value.length)
+				 console.log(document.getElementById('label').value.length)
+				     if(document.getElementById('nom').value.length > 0 &&
+				    		 document.getElementById('label').value.length > 0 &&
+				    		 document.getElementById('prix').value.length > 0) { 
+				         document.getElementById('submit').disabled = false
+				     } else { 
+				         document.getElementById('submit').disabled = true
+				     }
+				 }
+				 </script>
 </head>
 <body>
 

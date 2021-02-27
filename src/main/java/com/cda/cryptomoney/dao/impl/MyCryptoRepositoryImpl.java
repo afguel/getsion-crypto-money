@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.cda.cryptomoney.dao.MyCryptoRepository;
-import com.cda.cryptomoney.modele.MyCryptoMoney;
+import com.cda.cryptomoney.model.MyCryptoMoney;
 
 
 

@@ -7,28 +7,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.cda.cryptomoney.dao.CryptoRepository;
-import com.cda.cryptomoney.modele.CryptoMoney;
+import com.cda.cryptomoney.model.CryptoMoney;
 
 public class CryptoRepositoryImpl extends AbstractDAO implements CryptoRepository{
 	
 
 	@Override
 	public List<CryptoMoney> getAll() {
-		ArrayList<CryptoMoney> CryptoMoneys = new ArrayList<>();
+		ArrayList<CryptoMoney> cryptoMoneys = new ArrayList<>();
 		String request = "select * from CryptoMoney ;";
 		try {
 			result = this.statement.executeQuery(request);
 			while (result.next()) {
+				System.out.println(result.getInt("id"));
 				CryptoMoney cryptoMoney = new CryptoMoney(result.getInt("id"),
 								  result.getString("nom"),
-								  result.getString("label "),
-								  result.getFloat(" prix"));			
-				CryptoMoneys.add(cryptoMoney);
+								  result.getString("label"),
+								  result.getFloat("prix"));			
+				cryptoMoneys.add(cryptoMoney);
 			}
 		} catch (SQLException e) {
-			
+			e.printStackTrace();
 		}	
-		return CryptoMoneys;
+		return cryptoMoneys;
 	}
 
 	@Override
@@ -60,13 +61,16 @@ public class CryptoRepositoryImpl extends AbstractDAO implements CryptoRepositor
 			ps = connexion.prepareStatement(request);
 			ps.setInt(1, id);
 			result = ps.executeQuery();
-			result.next();
+			if(result.next()) {
 			CryptoMoney = new CryptoMoney(result.getInt("id"),
 					  result.getString("nom"),
 					  result.getString("label"),
 					  result.getFloat("prix"));	
+			}else {
+				return null;
+			}
 		} catch (SQLException e) {
-			
+			return null;
 		}
 		
 		return CryptoMoney;

@@ -3,16 +3,14 @@
 	<table class="table table-hover ">
 		<thead>
 			<tr>
-				<th>#</th>
+				
 				<th>Nom</th>
-				<th>Label</th>
-				<th>Prix actuel</th>
+				<th>Action</th>
 				</th>
 			</tr>
 		</thead>
 		<tbody>
-
-			<c:forEach var="i" begin="0" end="${ personnes.size()-1}" step="1">
+			<c:forEach var="i" begin="0" end="${ moneys.size()-1}" step="1">
 				<c:choose>
 					<c:when test="${i%2==0 }">
 						<tr class="table-success">
@@ -24,12 +22,10 @@
 
 				</c:choose>
 				<td><c:out value="${ moneys.get(i).nom}" /></td>
-				<td><c:out value="${ moneys.get(i).label}" /></td>
-				<td><c:out value="${ moneys.get(i).prix}" /></td>
 				<td>
-				<a class="badge bg-success btn-sm" data-placement="top" data-toggle="tooltip" href="<c:out value="${moneys.get(i).id}" ></c:out>" data-original-title="Modifier"><i class="fa fa-pencil"></i></a> 
-				<a class="badge bg-info btn-sm" data-placement="top" data-toggle="tooltip" href="<c:out value="${moneys.get(i).id}"></c:out>" data-original-title="Visualiser"><i class="fa fa-eye"></i> </a> 
-				<a class="badge bg-danger btn-sm" data-placement="top" data-toggle="tooltip" href="<c:out value="${moneys.get(i).id}"></c:out>" data-original-title="Supprimer"><i class="fa fa-trash"></i></a>
+				<a class="badge bg-success btn-sm" data-placement="top" data-toggle="tooltip" href="?action=set&id=<c:out value="${moneys.get(i).id}" ></c:out>" data-original-title="Modifier"><i class="fa fa-pencil"></i></a> 
+				<a class="badge bg-info btn-sm" data-placement="top" data-toggle="tooltip" href="?action=get&id=<c:out value="${moneys.get(i).id}"></c:out>" data-original-title="Visualiser"><i class="fa fa-eye"></i> </a> 
+				<a class="badge bg-danger btn-sm" data-placement="top" data-toggle="tooltip" href="?action=del&id=<c:out value="${moneys.get(i).id}"></c:out>" data-original-title="Supprimer"><i class="fa fa-trash"></i></a>
 				</td>
 				</tr>
 			</c:forEach>

@@ -8,13 +8,15 @@ import java.util.Properties;
 public class Connexion implements AutoCloseable{
 
 	
-	private static Connection connexion = null;	
+	private static Connection connexion = null;
+	
 	
 	private Connexion() {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Properties appProps = new Properties();
 			appProps.load(Connexion.class.getResourceAsStream("/projet.properties"));
+			System.out.println(appProps.getProperty("url"));
 			connexion = DriverManager.getConnection(
 					appProps.getProperty("url"), 
 					appProps.getProperty("username"),

@@ -1,4 +1,4 @@
-package com.cda.cryptomoney.modele;
+package com.cda.cryptomoney.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,11 +7,11 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class MyCryptoMoney {
+public class CryptoMoney {
 	
 	private int id;
-	private float nombreUnite;
-    private float prixAchat;
-    private int cryptoId;
-
+	private String nom;
+	private String label;
+	private float prix;
+ 
 }

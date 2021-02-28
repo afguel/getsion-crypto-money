@@ -24,9 +24,7 @@
 						placeholder='Prix actuel' onkeyup='stoppedTyping()' value= "<c:out value="${ money.prix}" />" >
 				</div>
 			
-				<input type="hidden"  name="id"  value= "<c:out value="${money.id}" />" >
 				<input type="hidden"  name="action" value="set"	>
-				
 				
 				<button id="submit" type="submit" class="btn btn-success float-end"	>Envoyer</button>
 			</div>

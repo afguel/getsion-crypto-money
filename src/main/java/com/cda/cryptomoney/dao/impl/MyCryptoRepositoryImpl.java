@@ -23,7 +23,7 @@ public class MyCryptoRepositoryImpl extends AbstractDAO implements MyCryptoRepos
 			result = this.statement.executeQuery(request);
 			while (result.next()) {
 				MyCryptoMoney myCryptoMoney = new MyCryptoMoney(result.getInt("id"),
-								  result.getFloat("nombreUnite"),
+								  result.getInt("nombreUnite"),
 								  result.getFloat("prixAchat"),
 								  result.getInt("cryptoId"));			
 				MyCryptoMoneys.add(myCryptoMoney);
@@ -40,7 +40,7 @@ public class MyCryptoRepositoryImpl extends AbstractDAO implements MyCryptoRepos
 		request = "INSERT INTO MyCryptoMoney (nom,label,prix) VALUES (?,?,?);";
 		try {
 			ps = connexion.prepareStatement(request, PreparedStatement.RETURN_GENERATED_KEYS);
-			ps.setFloat(1, MyCryptoMoney.getNombreUnite() );
+			ps.setInt(1, MyCryptoMoney.getNombreUnite() );
 			ps.setFloat(2, MyCryptoMoney.getPrixAchat());
 			ps.setInt(3, MyCryptoMoney.getCryptoId());
 			ps.executeUpdate();
@@ -65,7 +65,7 @@ public class MyCryptoRepositoryImpl extends AbstractDAO implements MyCryptoRepos
 			result = ps.executeQuery();
 			result.next();
 			MyCryptoMoney = new MyCryptoMoney(result.getInt("id"),
-					  result.getFloat("nombreUnite"),
+					  result.getInt("nombreUnite"),
 					  result.getFloat("prixAchat"),
 					  result.getInt("cryptoId"));	
 		} catch (SQLException e) {
@@ -85,7 +85,7 @@ public class MyCryptoRepositoryImpl extends AbstractDAO implements MyCryptoRepos
 				+ " where id = ?;";
 		try {
 			ps = connexion.prepareStatement(request, PreparedStatement.RETURN_GENERATED_KEYS);
-			ps.setFloat(1, MyCryptoMoney.getNombreUnite() );
+			ps.setInt(1, MyCryptoMoney.getNombreUnite() );
 			ps.setFloat(2, MyCryptoMoney.getPrixAchat());
 			ps.setInt(3, MyCryptoMoney.getCryptoId());
 			ps.setInt(4, id);

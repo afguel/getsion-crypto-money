@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class MyCryptoMoney {
 	
 	private int id;
-	private float nombreUnite;
+	private int nombreUnite;
     private float prixAchat;
     private int cryptoId;
 

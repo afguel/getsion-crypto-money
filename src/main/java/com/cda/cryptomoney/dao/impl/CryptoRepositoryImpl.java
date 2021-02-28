@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import com.cda.cryptomoney.dao.CryptoRepository;
@@ -19,7 +20,6 @@ public class CryptoRepositoryImpl extends AbstractDAO implements CryptoRepositor
 		try {
 			result = this.statement.executeQuery(request);
 			while (result.next()) {
-				System.out.println(result.getInt("id"));
 				CryptoMoney cryptoMoney = new CryptoMoney(result.getInt("id"),
 								  result.getString("nom"),
 								  result.getString("label"),
@@ -79,8 +79,7 @@ public class CryptoRepositoryImpl extends AbstractDAO implements CryptoRepositor
 
 	@Override
 	public CryptoMoney setOneById(int id, CryptoMoney CryptoMoney) {
-
-		request = "UPDATE SpecificAutoPart set nom= ? , "
+		request = "UPDATE cryptomoney set nom= ? , "
 				+ "label = ? ,"
 				+ "prix = ? "
 				+ " where id = ?;";
@@ -92,9 +91,10 @@ public class CryptoRepositoryImpl extends AbstractDAO implements CryptoRepositor
 			ps.setInt(4, id);
 			ps.executeUpdate();
 		} catch (SQLException e) {
+			e.printStackTrace();
 			return null;
 		}
-		return getOneById(id);
+		return CryptoMoney;
 	}
 
 	@Override
@@ -110,5 +110,24 @@ public class CryptoRepositoryImpl extends AbstractDAO implements CryptoRepositor
 		}
 		return true;
 	}	
+	
+	@Override
+	public  HashMap<Integer, CryptoMoney> getAllMap() {
+		HashMap<Integer, CryptoMoney> cryptoMoneys = new HashMap<>();
+		String request = "select * from CryptoMoney ;";
+		try {
+			result = this.statement.executeQuery(request);
+			while (result.next()) {
+				CryptoMoney cryptoMoney = new CryptoMoney(result.getInt("id"),
+								  result.getString("nom"),
+								  result.getString("label"),
+								  result.getFloat("prix"));			
+				cryptoMoneys.put(cryptoMoney.getId(), cryptoMoney) ;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}	
+		return cryptoMoneys;
+	}
 
 }

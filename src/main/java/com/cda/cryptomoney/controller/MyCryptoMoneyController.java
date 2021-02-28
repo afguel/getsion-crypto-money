@@ -8,19 +8,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.cda.cryptomoney.service.CryptoMoneyService;
-import com.cda.cryptomoney.service.impl.CryptoServiceImpl;
+import com.cda.cryptomoney.service.impl.MyCryptoSservice;
 
-@WebServlet("/money")
-public class CryptoMoneyController extends HttpServlet {
+@WebServlet
+public class MyCryptoMoneyController extends HttpServlet{
+
+	private MyCryptoSservice myCryptoSservice;
 	
-	CryptoMoneyService cryptoMoneyService = new CryptoServiceImpl();
-
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		String action = req.getParameter("action") != null ? req.getParameter("action").toString() : "";
 
+		System.out.println(action);
 
 		switch (action) {
 
@@ -29,19 +29,19 @@ public class CryptoMoneyController extends HttpServlet {
 			break;
 
 		case "set":
-			req.getRequestDispatcher("WEB-INF/crypto/set.jsp").forward(cryptoMoneyService.get(req), resp);
+			req.getRequestDispatcher("WEB-INF/crypto/set.jsp").forward(myCryptoSservice.get(req), resp);
 			break;
 
 		case "del":			
-			req.getRequestDispatcher("WEB-INF/crypto/all.jsp").forward(cryptoMoneyService.del(req), resp);
+			req.getRequestDispatcher("WEB-INF/crypto/all.jsp").forward(myCryptoSservice.del(req), resp);
 			break;
 
 		case "get":
-			req.getRequestDispatcher("WEB-INF/crypto/get.jsp").forward(cryptoMoneyService.get(req), resp);
+			req.getRequestDispatcher("WEB-INF/crypto/get.jsp").forward(myCryptoSservice.get(req), resp);
 			break;
 
 		default:			
-			req.getRequestDispatcher("WEB-INF/crypto/all.jsp").forward(cryptoMoneyService.all(req), resp);
+			req.getRequestDispatcher("WEB-INF/crypto/all.jsp").forward(myCryptoSservice.all(req), resp);
 			break;
 		}
 	}
@@ -50,16 +50,19 @@ public class CryptoMoneyController extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String action = req.getParameter("action") != null ? req.getParameter("action").toString() : "";
 
+		System.out.println(action);
 
 		switch (action) {
 
 		case "add":	
-			req= cryptoMoneyService.add(req);
+			req= myCryptoSservice.add(req);
+			System.out.println(req.getAttribute("chemin").toString());
 			req.getRequestDispatcher(req.getAttribute("chemin").toString()).forward(req, resp);
 			break;
 
 		case "set":
-			req= cryptoMoneyService.set(req);
+			req= myCryptoSservice.add(req);
+			System.out.println(req.getAttribute("chemin").toString());
 			req.getRequestDispatcher(req.getAttribute("chemin").toString()).forward(req, resp);
 			break;			
 		default:
@@ -68,5 +71,4 @@ public class CryptoMoneyController extends HttpServlet {
 
 		}
 	}
-
 }

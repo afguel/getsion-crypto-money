@@ -16,15 +16,15 @@ public class CryptoServiceImpl implements CryptoMoneyService {
 	public HttpServletRequest add(HttpServletRequest req) {
 		boolean vrai = true;
 		String message = "";
-		if (req.getParameter("nom") == null && req.getParameter("nom").equals("")) {
+		if (req.getParameter("nom") == null || req.getParameter("nom").equals("")) {
 			message += "Le nom ne peut pas etre vide <br>";
 			vrai = false;
 		}
-		if (req.getParameter("label") == null && req.getParameter("label").equals("")) {
+		if (req.getParameter("label") == null || req.getParameter("label").equals("")) {
 			message += "Le label ne peut pas etre vide <br>";
 			vrai = false;
 		}
-		if (req.getParameter("prix") == null && !req.getParameter("prix").toString().matches("\\d+\\.\\d{2,2}|\\d+")) {
+		if (req.getParameter("prix") == null || !req.getParameter("prix").toString().matches("\\d+\\.\\d{2,2}|\\d+")) {
 			message += "Le prix ne peut pas etre vide et doit etre un nombre réel avec une pricision de 2 chiffre apres la vergule <br>";
 			vrai = false;
 		}
@@ -33,7 +33,7 @@ public class CryptoServiceImpl implements CryptoMoneyService {
 			cryptoMoney.setNom(req.getParameter("nom"));
 			cryptoMoney.setLabel(req.getParameter("label"));
 			cryptoMoney.setPrix(Float.parseFloat(req.getParameter("prix")));
-			req.setAttribute("crypto", cryptoRepository.save(cryptoMoney));
+			req.setAttribute("money", cryptoRepository.save(cryptoMoney));
 			req.setAttribute("chemin", "WEB-INF/crypto/get.jsp");
 		} else {
 			req.setAttribute("message", message);
@@ -44,7 +44,6 @@ public class CryptoServiceImpl implements CryptoMoneyService {
 
 	@Override
 	public HttpServletRequest all(HttpServletRequest req) {
-		System.out.println(cryptoRepository.getAll().size());
 		req.setAttribute("moneys", cryptoRepository.getAll());
 		return req;
 	}
@@ -63,19 +62,19 @@ public class CryptoServiceImpl implements CryptoMoneyService {
 		boolean vrai = true;
 		int id=0;
 		String message = "";
-		if (req.getParameter("id") == null && req.getParameter("id").toString().matches("\\d+")) {
+		if (req.getParameter("id") != null && req.getParameter("id").toString().matches("\\d+")) {
 			id = Integer.parseInt(req.getParameter("id").toString());
 			cryptoMoney = cryptoRepository.getOneById(id);
 		}
-		if (req.getParameter("nom") == null && req.getParameter("nom").equals("")) {
+		if (req.getParameter("nom") == null || req.getParameter("nom").equals("")) {
 			message += "Le nom ne peut pas etre vide <br>";
 			vrai = false;
 		}
-		if (req.getParameter("label") == null && req.getParameter("label").equals("")) {
+		if (req.getParameter("label") == null || req.getParameter("label").equals("")) {
 			message += "Le label ne peut pas etre vide <br>";
 			vrai = false;
 		}
-		if (req.getParameter("prix") == null && !req.getParameter("prix").toString().matches("\\d+\\.\\d{2,2}|\\d+")) {
+		if (req.getParameter("prix") == null || !req.getParameter("prix").toString().matches("\\d+\\.\\d{2,2}|\\d+")) {
 			message += "Le prix ne peut pas etre vide et doit etre un nombre réel avec une pricision de 2 chiffre apres la vergule <br>";
 			vrai = false;
 		}
@@ -84,12 +83,12 @@ public class CryptoServiceImpl implements CryptoMoneyService {
 			cryptoMoney.setNom(req.getParameter("nom"));
 			cryptoMoney.setLabel(req.getParameter("label"));
 			cryptoMoney.setPrix(Float.parseFloat(req.getParameter("prix")));
-			req.setAttribute("crypto", cryptoRepository.setOneById(id,cryptoMoney));
+			req.setAttribute("money", cryptoRepository.setOneById(id,cryptoMoney));
 			req.setAttribute("chemin", "WEB-INF/crypto/get.jsp");
 		} else {		
 			message += "L'id a était modifier <br>";
 			req.setAttribute("message", message);
-			req.setAttribute("chemin", "WEB-INF/crypto/add.jsp");
+			req.setAttribute("chemin", "WEB-INF/crypto/set.jsp");
 		}
 		return req;
 	}

@@ -1,5 +1,5 @@
 <br>
-<div class="card col-4 offset-4">
+<div class="card col-md-4 col-sm-12 offset-md-4 offset-sm-none">
 	<div class="card-header bg-transparent border-success">
 		<c:out value="${ money.nom}" />
 		<c:out value="${ money.label}" />
@@ -21,3 +21,7 @@
 	</div>
 </div>
 
+<a href="?action=add" data-toggle="tooltip" data-placement="left"
+	title="Ajouter une crypto money"
+	class="btn btn-primary btn-lg post-free-add-btn"><i
+	class="fa fa-pencil"></i></a>

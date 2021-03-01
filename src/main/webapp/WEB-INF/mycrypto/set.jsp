@@ -1,7 +1,7 @@
 <c:url value="/" var="lienMoney"></c:url>
 
 <br>
-<div class="card col-4 offset-4">
+<div class="card col-md-4 col-sm-12 offset-md-4 offset-sm-none">
 	<div class="card-header bg-transparent border-success">Ajouter
 		une crypto money</div>
 	<div class="card-body">

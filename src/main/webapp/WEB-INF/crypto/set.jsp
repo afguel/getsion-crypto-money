@@ -3,7 +3,7 @@
 	<c:out value="${ message }" />
 </h4>
 
-<div class="card col-4 offset-4">
+<div class="card col-md-4 col-sm-12 offset-md-4 offset-sm-none">
 	<div class="card-header bg-transparent border-success">Ajouter une crypto money</div>
 	<div class="card-body">
 		<h4 style='color: red; font-weight: bold;'>

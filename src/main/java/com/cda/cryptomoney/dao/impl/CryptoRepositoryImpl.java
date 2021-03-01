@@ -78,6 +78,31 @@ public class CryptoRepositoryImpl extends AbstractDAO implements CryptoRepositor
 	}
 
 	@Override
+	public CryptoMoney getOneByNom(String nom) {
+		String request = "select * from CryptoMoney where nom =  ?";
+		CryptoMoney CryptoMoney = null;
+		try {
+			ps = connexion.prepareStatement(request);
+			ps.setString(1, nom);
+			result = ps.executeQuery();
+			if(result.next()) {
+			CryptoMoney = new CryptoMoney(result.getInt("id"),
+					  result.getString("nom"),
+					  result.getString("label"),
+					  result.getFloat("prix"));	
+			}else {
+				return null;
+			}
+		} catch (SQLException e) {
+			return null;
+		}
+		
+		return CryptoMoney;
+
+	}
+
+	
+	@Override
 	public CryptoMoney setOneById(int id, CryptoMoney CryptoMoney) {
 		request = "UPDATE cryptomoney set nom= ? , "
 				+ "label = ? ,"
@@ -111,23 +136,6 @@ public class CryptoRepositoryImpl extends AbstractDAO implements CryptoRepositor
 		return true;
 	}	
 	
-	@Override
-	public  HashMap<Integer, CryptoMoney> getAllMap() {
-		HashMap<Integer, CryptoMoney> cryptoMoneys = new HashMap<>();
-		String request = "select * from CryptoMoney ;";
-		try {
-			result = this.statement.executeQuery(request);
-			while (result.next()) {
-				CryptoMoney cryptoMoney = new CryptoMoney(result.getInt("id"),
-								  result.getString("nom"),
-								  result.getString("label"),
-								  result.getFloat("prix"));			
-				cryptoMoneys.put(cryptoMoney.getId(), cryptoMoney) ;
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}	
-		return cryptoMoneys;
-	}
+	
 
 }

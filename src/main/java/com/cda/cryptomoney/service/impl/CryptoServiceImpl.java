@@ -17,15 +17,21 @@ public class CryptoServiceImpl implements CryptoMoneyService {
 		boolean vrai = true;
 		String message = "";
 		if (req.getParameter("nom") == null || req.getParameter("nom").equals("")) {
-			message += "Le nom ne peut pas etre vide <br>";
+			message += "Le nom ne peut pas etre vide ";
 			vrai = false;
+			
 		}
 		if (req.getParameter("label") == null || req.getParameter("label").equals("")) {
-			message += "Le label ne peut pas etre vide <br>";
+			message += "Le label ne peut pas etre vide ";
 			vrai = false;
 		}
 		if (req.getParameter("prix") == null || !req.getParameter("prix").toString().matches("\\d+\\.\\d{2,2}|\\d+")) {
-			message += "Le prix ne peut pas etre vide et doit etre un nombre réel avec une pricision de 2 chiffre apres la vergule <br>";
+			message += "Le prix ne peut pas etre vide et doit etre un nombre réel avec une pricision de 2 chiffre apres la vergule ";
+			vrai = false;
+		}
+		
+		if(cryptoRepository.getOneByNom(req.getParameter("nom").toString())!=null) {
+			message += "Cette crypto money existe déjà";
 			vrai = false;
 		}
 
@@ -67,15 +73,15 @@ public class CryptoServiceImpl implements CryptoMoneyService {
 			cryptoMoney = cryptoRepository.getOneById(id);
 		}
 		if (req.getParameter("nom") == null || req.getParameter("nom").equals("")) {
-			message += "Le nom ne peut pas etre vide <br>";
+			message += "Le nom ne peut pas etre vide ";
 			vrai = false;
 		}
 		if (req.getParameter("label") == null || req.getParameter("label").equals("")) {
-			message += "Le label ne peut pas etre vide <br>";
+			message += "Le label ne peut pas etre vide ";
 			vrai = false;
 		}
 		if (req.getParameter("prix") == null || !req.getParameter("prix").toString().matches("\\d+\\.\\d{2,2}|\\d+")) {
-			message += "Le prix ne peut pas etre vide et doit etre un nombre réel avec une pricision de 2 chiffre apres la vergule <br>";
+			message += "Le prix ne peut pas etre vide et doit etre un nombre réel avec une pricision de 2 chiffre apres la vergule ";
 			vrai = false;
 		}
 
@@ -86,7 +92,7 @@ public class CryptoServiceImpl implements CryptoMoneyService {
 			req.setAttribute("money", cryptoRepository.setOneById(id,cryptoMoney));
 			req.setAttribute("chemin", "WEB-INF/crypto/get.jsp");
 		} else {		
-			message += "L'id a était modifier <br>";
+			message += "L'id a était modifier ";
 			req.setAttribute("message", message);
 			req.setAttribute("chemin", "WEB-INF/crypto/set.jsp");
 		}

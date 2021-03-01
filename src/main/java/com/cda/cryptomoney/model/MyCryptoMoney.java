@@ -1,5 +1,8 @@
 package com.cda.cryptomoney.model;
 
+
+import java.sql.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,8 +13,9 @@ import lombok.NoArgsConstructor;
 public class MyCryptoMoney {
 	
 	private int id;
+	private Date date;
 	private int nombreUnite;
     private float prixAchat;
-    private int cryptoId;
+    private CryptoMoney cryptoId;
 
 }

@@ -18,7 +18,7 @@ public class CryptoMoneyController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        req.setAttribute("menu", "money");
 		String action = req.getParameter("action") != null ? req.getParameter("action").toString() : "";
 
 
@@ -48,6 +48,7 @@ public class CryptoMoneyController extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setAttribute("menu", "money");
 		String action = req.getParameter("action") != null ? req.getParameter("action").toString() : "";
 
 

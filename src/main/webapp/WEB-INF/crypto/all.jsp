@@ -23,9 +23,9 @@
 				</c:choose>
 				<td><c:out value="${ moneys.get(i).nom}" /></td>
 				<td>
-				<a class="badge bg-success btn-sm" data-placement="top" data-toggle="tooltip" title="Modifier" href="?action=set&id=<c:out value="${moneys.get(i).id}" ></c:out>" data-original-title="Modifier"><i class="fa fa-pencil"></i></a> 
-				<a class="badge bg-info btn-sm" data-placement="top" data-toggle="tooltip" title="Afficher" href="?action=get&id=<c:out value="${moneys.get(i).id}"></c:out>" data-original-title="Visualiser"><i class="fa fa-eye"></i> </a> 
-				<a class="badge bg-danger btn-sm" data-placement="top" data-toggle="tooltip" title="Supprimer" href="?action=del&id=<c:out value="${moneys.get(i).id}"></c:out>" data-original-title="Supprimer"><i class="fa fa-trash"></i></a>
+				<a class="badge bg-success " data-placement="top" data-toggle="tooltip" title="Modifier" href="?action=set&id=<c:out value="${moneys.get(i).id}" ></c:out>" data-original-title="Modifier"><i class="fa fa-pencil fa-blanc"></i></a> 
+				<a class="badge bg-info " data-placement="top" data-toggle="tooltip" title="Afficher" href="?action=get&id=<c:out value="${moneys.get(i).id}"></c:out>" data-original-title="Visualiser"><i class="fa fa-eye fa-blanc"></i> </a> 
+				<a class="badge bg-danger " data-placement="top" data-toggle="tooltip" title="Supprimer" href="?action=del&id=<c:out value="${moneys.get(i).id}"></c:out>" data-original-title="Supprimer"><i class="fa fa-trash fa-blanc"></i></a>
 				</td>
 				</tr>
 			</c:forEach>

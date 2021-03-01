@@ -20,7 +20,7 @@ public class MyCryptoRepositoryImpl extends AbstractDAO implements MyCryptoRepos
 	@Override
 	public List<MyCryptoMoney> getAll() {
 		ArrayList<MyCryptoMoney> MyCryptoMoneys = new ArrayList<>();
-		String request = "select * from MyCryptoMoney;";
+		String request = "select * from mycryptomoney;";
 		try {
 			result = this.statement.executeQuery(request);
 			while (result.next()) {
@@ -41,7 +41,7 @@ public class MyCryptoRepositoryImpl extends AbstractDAO implements MyCryptoRepos
 	public MyCryptoMoney save(MyCryptoMoney MyCryptoMoney) {
 		System.out.println("repo");
 		System.out.println(MyCryptoMoney.getCryptoId());
-		request = "INSERT INTO MyCryptoMoney (date,nombreUnite,prixAchat, cryptoId) VALUES (?,?,?,?);";
+		request = "INSERT INTO mycryptomoney (date,nombreUnite,prixAchat, cryptoId) VALUES (?,?,?,?);";
 		try {
 			ps = connexion.prepareStatement(request, PreparedStatement.RETURN_GENERATED_KEYS);
 			ps.setDate(1,  MyCryptoMoney.getDate());
@@ -63,7 +63,7 @@ public class MyCryptoRepositoryImpl extends AbstractDAO implements MyCryptoRepos
 
 	@Override
 	public MyCryptoMoney getOneById(int id) {
-		String request = "select * from MyCryptoMoney where id =  ?";
+		String request = "select * from mycryptomoney where id =  ?";
 		MyCryptoMoney MyCryptoMoney = null;
 		try {
 			ps = connexion.prepareStatement(request);
@@ -85,7 +85,7 @@ public class MyCryptoRepositoryImpl extends AbstractDAO implements MyCryptoRepos
 	
 	@Override
 	public MyCryptoMoney getOneByCrypto(int id) {
-		String request = "select * from MyCryptoMoney where cryptoId =  ?";
+		String request = "select * from mycryptomoney where cryptoId =  ?";
 		MyCryptoMoney MyCryptoMoney = null;
 		try {
 			ps = connexion.prepareStatement(request);
@@ -108,7 +108,7 @@ public class MyCryptoRepositoryImpl extends AbstractDAO implements MyCryptoRepos
 	@Override
 	public MyCryptoMoney setOneById(int id, MyCryptoMoney MyCryptoMoney) {
 		System.out.println("je suis la");
-		request = "UPDATE MyCryptoMoney set nombreUnite= ? , "
+		request = "UPDATE mycryptomoney set nombreUnite= ? , "
 				+ "prixAchat = ? ,"
 				+ "cryptoId = ? "
 				+ " where id = ?;";
@@ -128,7 +128,7 @@ public class MyCryptoRepositoryImpl extends AbstractDAO implements MyCryptoRepos
 
 	@Override
 	public boolean deleteOneById(int id) {		
-		request = "DELETE FROM MyCryptoMoney WHERE id = ?;";
+		request = "DELETE FROM mycryptomoney WHERE id = ?;";
 		try {
 			ps = connexion.prepareStatement(request);
 			ps.setInt(1, id);

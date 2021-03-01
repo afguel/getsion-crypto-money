@@ -16,7 +16,7 @@ public class CryptoRepositoryImpl extends AbstractDAO implements CryptoRepositor
 	@Override
 	public List<CryptoMoney> getAll() {
 		ArrayList<CryptoMoney> cryptoMoneys = new ArrayList<>();
-		String request = "select * from CryptoMoney ;";
+		String request = "select * from cryptomoney ;";
 		try {
 			result = this.statement.executeQuery(request);
 			while (result.next()) {
@@ -35,7 +35,7 @@ public class CryptoRepositoryImpl extends AbstractDAO implements CryptoRepositor
 	@Override
 	public CryptoMoney save(CryptoMoney CryptoMoney) {
 		
-		request = "INSERT INTO CryptoMoney (nom,label,prix) VALUES (?,?,?);";
+		request = "INSERT INTO cryptomoney (nom,label,prix) VALUES (?,?,?);";
 		try {
 			ps = connexion.prepareStatement(request, PreparedStatement.RETURN_GENERATED_KEYS);
 			ps.setString(1, CryptoMoney.getNom() );
@@ -55,7 +55,7 @@ public class CryptoRepositoryImpl extends AbstractDAO implements CryptoRepositor
 
 	@Override
 	public CryptoMoney getOneById(int id) {
-		String request = "select * from CryptoMoney where id =  ?";
+		String request = "select * from cryptomoney where id =  ?";
 		CryptoMoney CryptoMoney = null;
 		try {
 			ps = connexion.prepareStatement(request);
@@ -79,7 +79,7 @@ public class CryptoRepositoryImpl extends AbstractDAO implements CryptoRepositor
 
 	@Override
 	public CryptoMoney getOneByNom(String nom) {
-		String request = "select * from CryptoMoney where nom =  ?";
+		String request = "select * from cryptomoney where nom =  ?";
 		CryptoMoney CryptoMoney = null;
 		try {
 			ps = connexion.prepareStatement(request);
@@ -124,7 +124,7 @@ public class CryptoRepositoryImpl extends AbstractDAO implements CryptoRepositor
 
 	@Override
 	public boolean deleteOneById(int id) {		
-		request = "DELETE FROM CryptoMoney WHERE id = ?;";
+		request = "DELETE FROM cryptomoney WHERE id = ?;";
 		try {
 			ps = connexion.prepareStatement(request);
 			ps.setInt(1, id);

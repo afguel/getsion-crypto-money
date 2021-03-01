@@ -17,7 +17,7 @@
 	href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
 	integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
 	crossorigin="anonymous" />
-<link rel="stylesheet"	href="public/css/style.css">
+<link rel="stylesheet" href="public/css/style.css">
 
 </head>
 <body>
@@ -25,46 +25,19 @@
 	<nav class="navbar navbar-expand-lg  navbar-dark bg-dark">
 		<div class="container-fluid">
 			<a class="navbar-brand" href="#">Gestion de crypto money</a>
-			<button class="navbar-toggler" type="button"
-				data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-				aria-controls="navbarSupportedContent" aria-expanded="false"
-				aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    				<span class="navbar-toggler-icon"></span>
+ 			    </button>
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 					<li class="nav-item">
-				<c:choose>
-					<c:when test="${menu==\"acceuil\"}">
-						<a class="nav-link active"	aria-current="page" href="index.html">Accueil</a>
-					</c:when>
-					<c:otherwise>
-						<a class="nav-link active"	aria-current="page" href="index.html">Accueil</a>
-					</c:otherwise>
-				</c:choose>
+						<a class="nav-link active" aria-current="page" href="index.html">Accueil</a>
 					</li>
 					<li class="nav-item">
-					<c:choose>
-					<c:when test="${menu==\"mymoney\"}">
-						<a class="nav-link active"	aria-current="page" href="index.html">Mon
-							compte</a>
-					</c:when>
-					<c:otherwise>
-						<a class="nav-link active"	aria-current="page" href="index.html">Mon
-							compte</a>
-					</c:otherwise>
-					</c:choose>
+						<a class="nav-link active" aria-current="page" href="index.html">Mon compte</a>
 					</li>
-					<li class="nav-item"><c:choose>
-					<c:when test="${menu==\"money\"}">
-						<a class="nav-link active"	aria-current="page" href="money">Crypeto
-							money</a>
-					</c:when>
-					<c:otherwise>
-						<a class="nav-link active"	aria-current="page" href="money">Crypeto
-							money</a>
-					</c:otherwise>
-					</c:choose>					
+					<li class="nav-item">
+						<a class="nav-link active" aria-current="page" href="money">Crypeto money</a>
 					</li>
 
 				</ul>

@@ -1,5 +1,5 @@
 <br>
-<div class="card col-4 offset-4">
+<div class="card col-md-4 col-sm-12 offset-md-4 offset-sm-none">
 	<div class="card-header bg-transparent border-success">
 	   <c:out value="${ mycrypto.cryptoId.nom}" /> 
 				<a class="badge bg-success float-right" data-placement="top" data-toggle="tooltip" href="?action=set&id=<c:out value="${moneys.get(i).id}" ></c:out>" data-original-title="Modifier"><i class="fa fa-pencil fa-blanc"></i></a>  

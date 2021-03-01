@@ -1,11 +1,13 @@
 package com.cda.cryptomoney.dao.impl;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.cda.cryptomoney.dao.CryptoRepository;
 import com.cda.cryptomoney.dao.MyCryptoRepository;
 import com.cda.cryptomoney.model.MyCryptoMoney;
 
@@ -13,19 +15,20 @@ import com.cda.cryptomoney.model.MyCryptoMoney;
 
 public class MyCryptoRepositoryImpl extends AbstractDAO implements MyCryptoRepository{
 
-
+     private final CryptoRepository cryptoRepository = new CryptoRepositoryImpl();
 
 	@Override
 	public List<MyCryptoMoney> getAll() {
 		ArrayList<MyCryptoMoney> MyCryptoMoneys = new ArrayList<>();
-		String request = "select * from MyCryptoMoney ;";
+		String request = "select * from MyCryptoMoney;";
 		try {
 			result = this.statement.executeQuery(request);
 			while (result.next()) {
 				MyCryptoMoney myCryptoMoney = new MyCryptoMoney(result.getInt("id"),
+						          result.getDate("date"),
 								  result.getInt("nombreUnite"),
 								  result.getFloat("prixAchat"),
-								  result.getInt("cryptoId"));			
+								  cryptoRepository.getOneById(result.getInt("cryptoId")));			
 				MyCryptoMoneys.add(myCryptoMoney);
 			}
 		} catch (SQLException e) {
@@ -36,13 +39,16 @@ public class MyCryptoRepositoryImpl extends AbstractDAO implements MyCryptoRepos
 
 	@Override
 	public MyCryptoMoney save(MyCryptoMoney MyCryptoMoney) {
-		
-		request = "INSERT INTO MyCryptoMoney (nom,label,prix) VALUES (?,?,?);";
+		System.out.println("repo");
+		System.out.println(MyCryptoMoney.getCryptoId());
+		request = "INSERT INTO MyCryptoMoney (date,nombreUnite,prixAchat, cryptoId) VALUES (?,?,?,?);";
 		try {
 			ps = connexion.prepareStatement(request, PreparedStatement.RETURN_GENERATED_KEYS);
-			ps.setInt(1, MyCryptoMoney.getNombreUnite() );
-			ps.setFloat(2, MyCryptoMoney.getPrixAchat());
-			ps.setInt(3, MyCryptoMoney.getCryptoId());
+			ps.setDate(1,  MyCryptoMoney.getDate());
+			ps.setInt(2, MyCryptoMoney.getNombreUnite() );
+			ps.setFloat(3, MyCryptoMoney.getPrixAchat());
+			ps.setInt(4, MyCryptoMoney.getCryptoId().getId());
+			
 			ps.executeUpdate();
 			ResultSet resultat = ps.getGeneratedKeys();
 			if (resultat.next()) {
@@ -65,9 +71,10 @@ public class MyCryptoRepositoryImpl extends AbstractDAO implements MyCryptoRepos
 			result = ps.executeQuery();
 			result.next();
 			MyCryptoMoney = new MyCryptoMoney(result.getInt("id"),
+					  result.getDate("date"),
 					  result.getInt("nombreUnite"),
 					  result.getFloat("prixAchat"),
-					  result.getInt("cryptoId"));	
+					  cryptoRepository.getOneById(result.getInt("cryptoId")));	
 		} catch (SQLException e) {
 			
 		}
@@ -75,11 +82,33 @@ public class MyCryptoRepositoryImpl extends AbstractDAO implements MyCryptoRepos
 		return MyCryptoMoney;
 
 	}
+	
+	@Override
+	public MyCryptoMoney getOneByCrypto(int id) {
+		String request = "select * from MyCryptoMoney where cryptoId =  ?";
+		MyCryptoMoney MyCryptoMoney = null;
+		try {
+			ps = connexion.prepareStatement(request);
+			ps.setInt(1, id);
+			result = ps.executeQuery();
+			result.next();
+			MyCryptoMoney = new MyCryptoMoney(result.getInt("id"),
+					  result.getDate("date"),
+					  result.getInt("nombreUnite"),
+					  result.getFloat("prixAchat"),
+					  cryptoRepository.getOneById(result.getInt("cryptoId")));	
+		} catch (SQLException e) {
+			
+		}
+		
+		return MyCryptoMoney;
+	}
+
 
 	@Override
 	public MyCryptoMoney setOneById(int id, MyCryptoMoney MyCryptoMoney) {
-
-		request = "UPDATE SpecificAutoPart set nombreUnite= ? , "
+		System.out.println("je suis la");
+		request = "UPDATE MyCryptoMoney set nombreUnite= ? , "
 				+ "prixAchat = ? ,"
 				+ "cryptoId = ? "
 				+ " where id = ?;";
@@ -87,10 +116,11 @@ public class MyCryptoRepositoryImpl extends AbstractDAO implements MyCryptoRepos
 			ps = connexion.prepareStatement(request, PreparedStatement.RETURN_GENERATED_KEYS);
 			ps.setInt(1, MyCryptoMoney.getNombreUnite() );
 			ps.setFloat(2, MyCryptoMoney.getPrixAchat());
-			ps.setInt(3, MyCryptoMoney.getCryptoId());
+			ps.setInt(3, MyCryptoMoney.getCryptoId().getId());
 			ps.setInt(4, id);
 			ps.executeUpdate();
 		} catch (SQLException e) {
+			e.printStackTrace();
 			return null;
 		}
 		return getOneById(id);

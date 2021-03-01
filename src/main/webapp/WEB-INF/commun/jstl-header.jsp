@@ -18,19 +18,7 @@
 	integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
 	crossorigin="anonymous" />
 <link rel="stylesheet"	href="public/css/style.css">
-<script type='text/javascript'>
-	function stoppedTyping() {
-		console.log(document.getElementById('nom').value.length)
-		console.log(document.getElementById('label').value.length)
-		if (document.getElementById('nom').value.length > 0
-				&& document.getElementById('label').value.length > 0
-				&& document.getElementById('prix').value.length > 0) {
-			document.getElementById('submit').disabled = false
-		} else {
-			document.getElementById('submit').disabled = true
-		}
-	}
-</script>
+
 </head>
 <body>
 
@@ -45,12 +33,39 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="#">Accueil</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Mon
-							compte</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Crypeto
-							money</a></li>
+					<li class="nav-item">
+				<c:choose>
+					<c:when test="${menu==\"acceuil\"}">
+						<a class="nav-link active"	aria-current="page" href="index.html">Accueil</a>
+					</c:when>
+					<c:otherwise>
+						<a class="nav-link active"	aria-current="page" href="index.html">Accueil</a>
+					</c:otherwise>
+				</c:choose>
+					</li>
+					<li class="nav-item">
+					<c:choose>
+					<c:when test="${menu==\"mymoney\"}">
+						<a class="nav-link active"	aria-current="page" href="index.html">Mon
+							compte</a>
+					</c:when>
+					<c:otherwise>
+						<a class="nav-link active"	aria-current="page" href="index.html">Mon
+							compte</a>
+					</c:otherwise>
+					</c:choose>
+					</li>
+					<li class="nav-item"><c:choose>
+					<c:when test="${menu==\"money\"}">
+						<a class="nav-link active"	aria-current="page" href="money">Crypeto
+							money</a>
+					</c:when>
+					<c:otherwise>
+						<a class="nav-link active"	aria-current="page" href="money">Crypeto
+							money</a>
+					</c:otherwise>
+					</c:choose>					
+					</li>
 
 				</ul>
 			</div>

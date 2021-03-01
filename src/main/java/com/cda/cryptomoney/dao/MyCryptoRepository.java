@@ -4,4 +4,5 @@ import com.cda.cryptomoney.model.MyCryptoMoney;
 
 public interface MyCryptoRepository extends Repository<MyCryptoMoney>{
 
+	MyCryptoMoney getOneByCrypto(int id);
 }
